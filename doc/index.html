@@ -215,19 +215,24 @@
     <h2 id="theoretical">2. Theoretical Background</h2>
 
     <div class="theorem">
-      <h3>Erdős-Gallai Theorem</h3>
-      <p>
-        A sequence of non-negative integers d₁ ≥ d₂ ≥ ... ≥ dₙ is graphic if and
-        only if:
-      </p>
-      <ol>
+    <h3>Erdős-Gallai Theorem</h3>
+    <p>
+        A sequence of non-negative integers d₁ ≥ d₂ ≥ ... ≥ dₙ is graphic if and only if:
+    </p>
+    <ol>
         <li>The sum of the sequence is even</li>
-        <li>For every k in [1,n]:</li>
-      </ol>
-      <pre>
-sum(dᵢ) ≤ k(k-1) + sum(min(dᵢ,k)) for i=k+1 to n
-i=1 to k</pre
-      >
+        <li>For every k in [1,n], the following inequality holds:</li>
+    </ol>
+    <div class="math">
+        <p>
+            ∑<sub>i=1</sub><sup>k</sup> d<sub>i</sub> ≤ k(k-1) + ∑<sub>i=k+1</sub><sup>n</sup> min(d<sub>i</sub>, k)
+        </p>
+    </div>
+        <p class="note">
+            This means that for each k, the sum of the k largest degrees must be less than or equal to
+            the maximum possible number of edges between k vertices (k(k-1)) plus the sum of the minimum of
+            each remaining degree and k.
+        </p>
     </div>
 
     <div class="theorem">
