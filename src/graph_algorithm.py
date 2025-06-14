@@ -44,7 +44,7 @@ class GraphSequenceAnalyzer:
                 return False
                 
         return True
-        
+    
     def havel_hakimi_check(self, sequence: List[int]) -> bool:
         """
         Implements the Havel-Hakimi theorem to check if a sequence is graphic.
@@ -61,7 +61,7 @@ class GraphSequenceAnalyzer:
         # Make a copy to avoid modifying the original sequence
         seq = sequence.copy()
         
-        while True:
+        while seq:  # Changed from while True
             # Sort in descending order
             seq.sort(reverse=True)
             
@@ -72,17 +72,19 @@ class GraphSequenceAnalyzer:
             # Get the first element
             d1 = seq.pop(0)
             
-            # If d1 is negative or greater than available vertices,
+            # If d1 is negative or strictly greater than available vertices,
             # the sequence is not graphic
-            if d1 < 0 or d1 >= len(seq):
+            if d1 < 0 or d1 > len(seq):  # Changed from d1 >= len(seq)
                 return False
                 
             # Subtract 1 from the next d1 elements
             for i in range(d1):
-                if i >= len(seq):
+                if i >= len(seq):  # This check may not be needed with fixed condition above
                     return False
                 seq[i] -= 1
-                
+        
+        return True  # Added return True for case when sequence becomes empty
+        
     def is_graphic(self, sequence: List[int], method: str = 'both') -> bool:
         """
         Determines if a sequence is graphic using specified method(s).
@@ -119,55 +121,47 @@ class GraphSequenceAnalyzer:
         vertices = list(range(n))
         result_graphs = []
         
-        # Generate all possible edge combinations
-        potential_edges = list(combinations(vertices, 2))
+        # Create a graph with the correct number of vertices
+        G = nx.Graph()
+        G.add_nodes_from(vertices)
         
-        def is_valid_graph(edges: Set[Tuple[int, int]]) -> bool:
-            """Check if a set of edges creates a graph with the desired degree sequence."""
-            degrees = [0] * n
-            for u, v in edges:
-                degrees[u] += 1
-                degrees[v] += 1
-            return sorted(degrees, reverse=True) == sorted(sequence, reverse=True)
+        def is_valid_degree_sequence(G):
+            """Check if the current graph has the desired degree sequence"""
+            current_degrees = sorted([G.degree(v) for v in G.nodes()], reverse=True)
+            target_degrees = sorted(sequence, reverse=True)
+            return current_degrees == target_degrees
 
-        def generate_graphs(current_edges: Set[Tuple[int, int]], 
-                          remaining_edges: List[Tuple[int, int]], 
-                          vertex_degrees: List[int]):
-            """Recursively generate all possible valid graphs."""
-            if is_valid_graph(current_edges):
-                G = nx.Graph()
-                G.add_nodes_from(vertices)
-                G.add_edges_from(current_edges)
-                
-                # Check if this graph is isomorphic to any existing graph
+        def can_add_edge(G, u, v, target_degrees):
+            """Check if adding edge (u,v) maintains valid degree sequence"""
+            if G.has_edge(u, v):
+                return False
+            return (G.degree(u) < target_degrees[u] and 
+                    G.degree(v) < target_degrees[v])
+
+        def generate_recursive(G, remaining_edges):
+            if is_valid_degree_sequence(G):
+                # Found a valid graph
                 if not any(nx.is_isomorphic(G, H) for H in result_graphs):
-                    result_graphs.append(G)
+                    result_graphs.append(G.copy())
                 return
 
             if not remaining_edges:
                 return
 
-            edge = remaining_edges[0]
+            u, v = remaining_edges[0]
             new_remaining = remaining_edges[1:]
-            
-            # Try adding the edge
-            new_degrees = vertex_degrees.copy()
-            new_degrees[edge[0]] += 1
-            new_degrees[edge[1]] += 1
-            
-            if all(d <= s for d, s in zip(new_degrees, sequence)):
-                generate_graphs(
-                    current_edges | {edge},
-                    new_remaining,
-                    new_degrees
-                )
-            
-            # Try without adding the edge
-            generate_graphs(
-                current_edges,
-                new_remaining,
-                vertex_degrees
-            )
 
-        generate_graphs(set(), potential_edges, [0] * n)
+            # Try adding the edge
+            if can_add_edge(G, u, v, dict(zip(vertices, sequence))):
+                G.add_edge(u, v)
+                generate_recursive(G, new_remaining)
+                G.remove_edge(u, v)
+
+            # Try without the edge
+            generate_recursive(G, new_remaining)
+
+        # Generate all possible edge combinations
+        potential_edges = list(combinations(vertices, 2))
+        generate_recursive(G, potential_edges)
+        
         return result_graphs

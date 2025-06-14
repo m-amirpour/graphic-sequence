@@ -1,358 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph Theory Project Documentation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph Sequence Analyzer Documentation</title>
+    <!-- Add Prism CSS theme (you can choose different themes) -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <!-- Add Prism core CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 { 
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background-color: #f5f5f5;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-        }
-        pre {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        .theorem {
-            background-color: #e8f4f8;
-            border-left: 4px solid #2980b9;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .algorithm {
-            background-color: #f8f9f9;
-            border-left: 4px solid #27ae60;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .implementation {
-            background-color: #fdf5e6;
-            border-left: 4px solid #d35400;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .result {
-            background-color: #f9ebea;
-            border-left: 4px solid #c0392b;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f5f5f5;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-        }
-        .reference {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 40px;
-        }
-        .note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+      code {
+        background-color: #2d2d2d;
+        color: #ccc;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: "Fira Code", "Consolas", monospace;
+      }
+      pre {
+        background-color: #2d2d2d;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: "Fira Code", "Consolas", monospace;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .theorem {
+        background-color: #e8f4f8;
+        border-left: 4px solid #2980b9;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .algorithm {
+        background-color: #f8f9f9;
+        border-left: 4px solid #27ae60;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .implementation {
+        background-color: #fdf5e6;
+        border-left: 4px solid #d35400;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .result {
+        background-color: #f9ebea;
+        border-left: 4px solid #c0392b;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #f5f5f5;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .reference {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 40px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .note {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .proof {
+        background-color: #f0f8ff;
+        border-left: 4px solid #4169e1;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .metadata {
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .complexity {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .example {
+        background-color: #f0fff0;
+        border-left: 4px solid #98fb98;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .math {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+      }
+      /* Code highlighting customization */
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #8e908c;
+      }
+      .token.function {
+        color: #4271ae;
+      }
+      .token.keyword {
+        color: #8959a8;
+      }
+      .token.string {
+        color: #718c00;
+      }
+      .token.number {
+        color: #f5871f;
+      }
+      .token.boolean {
+        color: #f5871f;
+      }
+      .token.operator {
+        color: #3e999f;
+      }
+      .token.class-name {
+        color: #c82829;
+      }
     </style>
-</head>
-<body>
-    <h1>Graph Sequence Analysis Project</h1>
-    <p><strong>Author:</strong> Muhammad Mahdi Amirpour (m-amirpour)</p>
-    <p><strong>Date:</strong> 2025-06-14 10:51:14 UTC</p>
-    <p><strong>GitHub Repository:</strong> <a href="https://github.com/m-amirpour/graph-theory">https://github.com/m-amirpour/graph-theory</a></p>
+  </head>
+  <body>
+    <div class="metadata">
+      <p><strong>Author:</strong> Muhammad Mahdi Amirpour</p>
+      <p><strong>Student ID:</strong> 40003033</p>
+    </div>
+
+    <h1>Graph Sequence Analyzer Documentation</h1>
 
     <h2>Table of Contents</h2>
     <ol>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#theoretical-background">Theoretical Background</a></li>
-        <li><a href="#algorithms">Algorithms</a></li>
-        <li><a href="#implementation">Implementation</a></li>
-        <li><a href="#results">Results and Analysis</a></li>
-        <li><a href="#ui">User Interface</a></li>
-        <li><a href="#testing">Testing and Validation</a></li>
-        <li><a href="#conclusions">Conclusions</a></li>
-        <li><a href="#references">References</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#theoretical">Theoretical Background</a></li>
+      <li>
+        <a href="#implementation">Implementation Details</a>
+        <ul>
+          <li><a href="#erdos">Erdős-Gallai Implementation</a></li>
+          <li><a href="#havel">Havel-Hakimi Implementation</a></li>
+          <li><a href="#graph-gen">Graph Generation</a></li>
+        </ul>
+      </li>
+      <li><a href="#usage">Usage Examples</a></li>
+      <li><a href="#complexity">Time and Space Complexity</a></li>
     </ol>
 
-    <h2 id="introduction">1. Introduction</h2>
-    <p>This project implements a comprehensive graph sequence analyzer that determines whether a given sequence of non-negative integers can be realized as the degree sequence of a simple graph. Additionally, it generates all possible non-isomorphic graph realizations for graphic sequences.</p>
-
-    <div class="note">
-        <strong>Key Features:</strong>
-        <ul>
-            <li>Determination of graphic sequences using the Havel-Hakimi theorem</li>
-            <li>Generation of all possible non-isomorphic graph realizations</li>
-            <li>Interactive GUI for visualization and analysis</li>
-            <li>Comprehensive test suite with various graph families</li>
-        </ul>
+    <h2 id="overview">1. Overview</h2>
+    <div class="implementation">
+      <p>
+        The <code>GraphSequenceAnalyzer</code> class provides a comprehensive
+        implementation for analyzing and generating graphs from degree sequences
+        using two fundamental theorems:
+      </p>
+      <ul>
+        <li>Erdős-Gallai theorem for sequence verification</li>
+        <li>Havel-Hakimi theorem for constructive verification</li>
+        <li>Non-isomorphic graph generation algorithm</li>
+      </ul>
     </div>
 
-    <h2 id="theoretical-background">2. Theoretical Background</h2>
+    <h2 id="theoretical">2. Theoretical Background</h2>
+
+    <div class="theorem">
+      <h3>Erdős-Gallai Theorem</h3>
+      <p>
+        A sequence of non-negative integers d₁ ≥ d₂ ≥ ... ≥ dₙ is graphic if and
+        only if:
+      </p>
+      <ol>
+        <li>The sum of the sequence is even</li>
+        <li>For every k in [1,n]:</li>
+      </ol>
+      <pre>
+sum(dᵢ) ≤ k(k-1) + sum(min(dᵢ,k)) for i=k+1 to n
+i=1 to k</pre
+      >
+    </div>
+
+    <div class="theorem">
+      <h3>Havel-Hakimi Theorem</h3>
+      <p>A sequence is graphic if and only if the sequence obtained by:</p>
+      <ol>
+        <li>Removing the largest term d₁</li>
+        <li>Subtracting 1 from the next d₁ largest terms</li>
+        <li>Reordering in descending order</li>
+      </ol>
+      <p>is itself graphic (with base case of all zeros being graphic).</p>
+    </div>
+
+    <h2 id="implementation">3. Implementation Details</h2>
+
+    <div class="implementation" id="erdos">
+      <h3>3.1 Erdős-Gallai Implementation</h3>
+      <pre><code class="language-python">
+def erdos_gallai_check(self, sequence: List[int]) -> bool:
+    """
+    Implements the Erdős-Gallai theorem to check if a sequence is graphic.
     
-    <h3>2.1 Graph Sequences</h3>
-    <div class="theorem">
-        <h4>Definition:</h4>
-        <p>A sequence of non-negative integers d = (d₁, d₂, ..., dₙ) is called graphic if there exists a simple graph G with vertex set V(G) = {v₁, v₂, ..., vₙ} such that deg(vᵢ) = dᵢ for i = 1, 2, ..., n.</p>
-    </div>
-
-    <h3>2.2 The Havel-Hakimi Theorem</h3>
-    <div class="theorem">
-        <h4>Theorem:</h4>
-        <p>A sequence of non-negative integers d = (d₁, d₂, ..., dₙ) in non-increasing order is graphic if and only if the sequence</p>
-        <p>d' = (d₂-1, d₃-1, ..., d<sub>d₁+1</sub>-1, d<sub>d₁+2</sub>, ..., dₙ)</p>
-        <p>is graphic, where d' is reordered in non-increasing order.</p>
+    Args:
+        sequence (List[int]): A sequence of non-negative integers
         
-        <h4>Proof Sketch:</h4>
-        <ol>
-            <li>If d is graphic, then d' is obtained by removing a vertex of degree d₁ and its edges</li>
-            <li>If d' is graphic, we can construct a graph with degree sequence d by adding a new vertex and connecting it to the d₁ vertices with highest degrees</li>
-        </ol>
-    </div>
-
-    <h3>2.3 Fundamental Properties</h3>
-    <div class="theorem">
-        <h4>Necessary Conditions:</h4>
-        <ol>
-            <li>The sum of degrees must be even (Handshaking Lemma)</li>
-            <li>The maximum degree must be less than the number of vertices</li>
-            <li>The number of vertices of odd degree must be even</li>
-        </ol>
-    </div>
-
-    <h2 id="algorithms">3. Algorithms</h2>
-
-    <h3>3.1 Graphic Sequence Verification</h3>
-    <div class="algorithm">
-        <h4>Havel-Hakimi Algorithm:</h4>
-        <pre>
-Input: Sequence d = (d₁, d₂, ..., dₙ)
-Output: Boolean indicating if d is graphic
-
-Algorithm HavelHakimi(d):
-    while d is not empty:
-        Sort d in non-increasing order
-        if all elements are 0:
-            return True
-        d₁ = first element of d
-        if d₁ ≥ len(d) or d₁ < 0:
+    Returns:
+        bool: True if the sequence is graphic, False otherwise
+    """
+    if not sequence:
+        return True
+        
+    # Make a copy and sort in descending order
+    seq = sorted(sequence, reverse=True)
+    n = len(seq)
+    
+    # Check if sum is even
+    if sum(seq) % 2 != 0:
+        return False
+        
+    # Check Erdős-Gallai conditions
+    for k in range(1, n + 1):
+        left_sum = sum(seq[:k])
+        right_sum = k * (k - 1)
+        right_sum += sum(min(seq[i], k) for i in range(k, n))
+        
+        if left_sum > right_sum:
             return False
-        Remove d₁ from d
-        For i from 1 to d₁:
-            if i > len(d):
+            
+    return True</code></pre>
+
+      <div class="complexity">
+        <strong>Time Complexity:</strong> O(n²)<br />
+        <strong>Space Complexity:</strong> O(n)
+      </div>
+    </div>
+
+    <div class="implementation" id="havel">
+      <h3>3.2 Havel-Hakimi Implementation</h3>
+      <pre><code class="language-python">
+def havel_hakimi_check(self, sequence: List[int]) -> bool:
+    """
+    Implements the Havel-Hakimi theorem to check if a sequence is graphic.
+    
+    Args:
+        sequence (List[int]): A sequence of non-negative integers
+        
+    Returns:
+        bool: True if the sequence is graphic, False otherwise
+    """
+    if not sequence:
+        return True
+    
+    # Make a copy to avoid modifying the original sequence
+    seq = sequence.copy()
+    
+    while True:
+        # Sort in descending order
+        seq.sort(reverse=True)
+        
+        # If all elements are 0, the sequence is graphic
+        if all(x == 0 for x in seq):
+            return True
+        
+        # Get the first element
+        d1 = seq.pop(0)
+        
+        # If d1 is negative or greater than available vertices,
+        # the sequence is not graphic
+        if d1 < 0 or d1 >= len(seq):
+            return False
+            
+        # Subtract 1 from the next d1 elements
+        for i in range(d1):
+            if i >= len(seq):
                 return False
-            d[i] = d[i] - 1
-    return True
-        </pre>
-        <p>Time Complexity: O(n²) where n is the length of the sequence</p>
-        <p>Space Complexity: O(n)</p>
+            seq[i] -= 1</code></pre>
+
+      <div class="complexity">
+        <strong>Time Complexity:</strong> O(n²)<br />
+        <strong>Space Complexity:</strong> O(n)
+      </div>
     </div>
 
-    <h3>3.2 Graph Generation</h3>
-    <div class="algorithm">
-        <h4>Non-isomorphic Graph Generation Algorithm:</h4>
-        <pre>
-Input: Graphic sequence d = (d₁, d₂, ..., dₙ)
-Output: Set of all non-isomorphic graphs with degree sequence d
-
-Algorithm GenerateGraphs(d):
-    if not IsGraphic(d):
-        return empty_set
-    
-    vertices = {1, 2, ..., n}
-    potential_edges = all pairs of vertices
-    result_graphs = empty_set
-    
-    Function GenerateRecursive(current_edges, remaining_edges, degrees):
-        if degrees matches target sequence d:
-            G = create_graph(current_edges)
-            if G is not isomorphic to any graph in result_graphs:
-                add G to result_graphs
-            return
-            
-        if remaining_edges is empty:
-            return
-            
-        edge = first edge in remaining_edges
-        new_remaining = remaining_edges - {edge}
+    <div class="implementation" id="graph-gen">
+      <h3>3.3 Graph Generation Algorithm</h3>
+      <pre><code class="language-python">
+    def generate_all_graphs(self, sequence: List[int]) -> List[nx.Graph]:
+        """
+        Generates all possible non-isomorphic simple graphs with the given degree sequence.
         
-        // Try adding the edge
-        if adding edge maintains valid degrees:
-            GenerateRecursive(current_edges ∪ {edge}, new_remaining, updated_degrees)
+        Args:
+            sequence (List[int]): A graphic sequence
             
-        // Try without the edge
-        GenerateRecursive(current_edges, new_remaining, degrees)
+        Returns:
+            List[nx.Graph]: List of all non-isomorphic graphs with the given degree sequence
+        """
+        if not self.is_graphic(sequence):
+            return []
+
+        n = len(sequence)
+        vertices = list(range(n))
+        result_graphs = []
         
-    GenerateRecursive(∅, potential_edges, [0, 0, ..., 0])
-    return result_graphs
-        </pre>
+        # Generate all possible edge combinations
+        potential_edges = list(combinations(vertices, 2))
+        
+        def is_valid_graph(edges: Set[Tuple[int, int]]) -> bool:
+            """Check if a set of edges creates a graph with the desired degree sequence."""
+            degrees = [0] * n
+            for u, v in edges:
+                degrees[u] += 1
+                degrees[v] += 1
+            return sorted(degrees, reverse=True) == sorted(sequence, reverse=True)
+
+        def generate_graphs(current_edges: Set[Tuple[int, int]], 
+                          remaining_edges: List[Tuple[int, int]], 
+                          vertex_degrees: List[int]):
+            """Recursively generate all possible valid graphs."""
+            if is_valid_graph(current_edges):
+                G = nx.Graph()
+                G.add_nodes_from(vertices)
+                G.add_edges_from(current_edges)
+                
+                # Check if this graph is isomorphic to any existing graph
+                if not any(nx.is_isomorphic(G, H) for H in result_graphs):
+                    result_graphs.append(G)
+                return
+
+            if not remaining_edges:
+                return
+
+            edge = remaining_edges[0]
+            new_remaining = remaining_edges[1:]
+            
+            # Try adding the edge
+            new_degrees = vertex_degrees.copy()
+            new_degrees[edge[0]] += 1
+            new_degrees[edge[1]] += 1
+            
+            if all(d <= s for d, s in zip(new_degrees, sequence)):
+                generate_graphs(
+                    current_edges | {edge},
+                    new_remaining,
+                    new_degrees
+                )
+            
+            # Try without adding the edge
+            generate_graphs(
+                current_edges,
+                new_remaining,
+                vertex_degrees
+            )
+
+        generate_graphs(set(), potential_edges, [0] * n)
+        return result_graphs
+      </code></pre>
+
+      <div class="complexity">
+        <strong>Time Complexity:</strong> O(2^(n choose 2)) worst case<br />
+        <strong>Space Complexity:</strong> O(n²) per graph
+      </div>
     </div>
 
-    <h2 id="implementation">4. Implementation</h2>
-    
-    <h3>4.1 Project Structure</h3>
-    <div class="implementation">
-        <pre>
-graph-theory/
-├── final-project/
-    ├── src/
-    │   ├── __init__.py
-    │   ├── graph_algorithm.py
-    │   ├── gui.py
-    │   ├── main.py
-    │   └── test_graph.py
-    └── doc/
-        └── graph_theory_project_documentation.html
-        </pre>
+    <h2 id="usage">4. Usage Examples</h2>
+
+    <div class="example">
+      <h3>Basic Usage</h3>
+      <pre><code class="language-python"></code>
+        # Create an analyzer instance
+        analyzer = GraphSequenceAnalyzer()
+
+        # Test if a sequence is graphic
+        sequence = [3, 3, 3, 3]  # K4 (complete graph on 4 vertices)
+        is_graphic = analyzer.is_graphic(sequence)
+
+        # Generate all possible graphs
+        if is_graphic:
+            graphs = analyzer.generate_all_graphs(sequence)
+      </code></pre>
     </div>
 
-    <h3>4.2 Key Components</h3>
-    <div class="implementation">
-        <h4>GraphSequenceAnalyzer Class:</h4>
-        <ul>
-            <li>Implements the Havel-Hakimi algorithm for sequence verification</li>
-            <li>Generates all possible non-isomorphic graphs</li>
-            <li>Uses NetworkX library for graph operations</li>
-        </ul>
-
-        <h4>GUI Component:</h4>
-        <ul>
-            <li>Built with Tkinter for cross-platform compatibility</li>
-            <li>Interactive visualization using Matplotlib</li>
-            <li>Real-time sequence analysis and graph display</li>
-            <li>Support for multiple graph realizations</li>
-        </ul>
-
-        <h4>Test Suite:</h4>
-        <ul>
-            <li>Comprehensive test cases covering various graph families</li>
-            <li>Unit tests for algorithm verification</li>
-            <li>Integration tests for GUI components</li>
-        </ul>
+    <div class="example">
+      <h3>Example Sequences</h3>
+      <table>
+        <tr>
+          <th>Sequence</th>
+          <th>Description</th>
+          <th>Is Graphic</th>
+          <th># of Realizations</th>
+        </tr>
+        <tr>
+          <td>[2, 2, 2, 2]</td>
+          <td>Cycle on 4 vertices</td>
+          <td>Yes</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>[3, 3, 3, 3]</td>
+          <td>Complete graph K4</td>
+          <td>Yes</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>[2, 2, 2, 1, 1]</td>
+          <td>Path with one branch</td>
+          <td>Yes</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>[3, 2, 2, 1]</td>
+          <td>Star with extra edge</td>
+          <td>Yes</td>
+          <td>2</td>
+        </tr>
+      </table>
     </div>
 
-    <h2 id="results">5. Results and Analysis</h2>
-    
-    <h3>5.1 Test Case Results</h3>
+    <h2 id="complexity">5. Time and Space Complexity</h2>
+
     <div class="result">
-        <h4>Summary of Test Cases:</h4>
-        <table>
-            <tr>
-                <th>Graph Family</th>
-                <th>Sequence</th>
-                <th>Graphic</th>
-                <th>Realizations</th>
-            </tr>
-            <tr>
-                <td>Regular Graph</td>
-                <td>(2,2,2,2)</td>
-                <td>Yes</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Star Graph</td>
-                <td>(3,1,1,1)</td>
-                <td>Yes</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Complete Graph K4</td>
-                <td>(3,3,3,3)</td>
-                <td>Yes</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Path Graph</td>
-                <td>(2,2,1,1)</td>
-                <td>Yes</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>Bipartite K2,3</td>
-                <td>(3,3,2,2,2)</td>
-                <td>Yes</td>
-                <td>3</td>
-            </tr>
-        </table>
+      <table>
+        <tr>
+          <th>Method</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+        <tr>
+          <td>Erdős-Gallai Check</td>
+          <td>O(n²)</td>
+          <td>O(n)</td>
+        </tr>
+        <tr>
+          <td>Havel-Hakimi Check</td>
+          <td>O(n²)</td>
+          <td>O(n)</td>
+        </tr>
+        <tr>
+          <td>Graph Generation</td>
+          <td>O(2^(n choose 2))</td>
+          <td>O(2^n)</td>
+        </tr>
+        <tr>
+          <td>Isomorphism Check</td>
+          <td>O(n!)</td>
+          <td>O(n²)</td>
+        </tr>
+      </table>
     </div>
 
-    <h3>5.2 Performance Analysis</h3>
-    <div class="result">
-        <h4>Algorithm Performance:</h4>
-        <ul>
-            <li>Havel-Hakimi Implementation: O(n²) time complexity</li>
-            <li>Graph Generation: Exponential in worst case due to isomorphism checking</li>
-            <li>Memory Usage: Linear for sequence verification, polynomial for graph storage</li>
-        </ul>
-    </div>
-
-    <h2 id="ui">6. User Interface</h2>
-    <div class="implementation">
-        <h4>Features:</h4>
-        <ul>
-            <li>Interactive sequence input</li>
-            <li>Pre-defined test cases with explanations</li>
-            <li>Real-time graph visualization</li>
-            <li>Navigation between multiple realizations</li>
-            <li>Theoretical information display</li>
-        </ul>
-    </div>
-
-    <h2 id="testing">7. Testing and Validation</h2>
-    <div class="result">
-        <h4>Test Coverage:</h4>
-        <ul>
-            <li>Unit tests for algorithm correctness</li>
-            <li>Integration tests for GUI functionality</li>
-            <li>Edge cases and boundary conditions</li>
-            <li>Various graph families and special cases</li>
-        </ul>
-    </div>
-
-    <h2 id="conclusions">8. Conclusions</h2>
-    <p>The implemented system successfully determines whether a sequence is graphic and generates all possible non-isomorphic realizations. The GUI provides an intuitive interface for analysis and visualization, making it suitable for both educational and research purposes.</p>
-
-    <h2 id="references">9. References</h2>
     <div class="reference">
-        <ol>
-            <li>Havel, V. (1955). "A remark on the existence of finite graphs" (in Czech). Časopis pro pěstování matematiky, 80, 477-480.</li>
-            <li>Hakimi, S. L. (1962). "On realizability of a set of integers as degrees of the vertices of a linear graph". Journal of the Society for Industrial and Applied Mathematics, 10(3), 496-506.</li>
-            <li>Erdős, P., & Gallai, T. (1960). "Graphs with prescribed degrees of vertices" (in Hungarian). Matematikai Lapok, 11, 264-274.</li>
-            <li>NetworkX Documentation. <a href="https://networkx.org/documentation/stable/">https://networkx.org/documentation/stable/</a></li>
-            <li>McKay, B. D., & Piperno, A. (2014). "Practical graph isomorphism, II". Journal of Symbolic Computation, 60, 94-112.</li>
-            <li>West, D. B. (2000). Introduction to Graph Theory (2nd ed.). Prentice Hall.</li>
-            <li>Bondy, J. A., & Murty, U. S. R. (2008). Graph Theory. Springer.</li>
-        </ol>
+      <h2>References</h2>
+      <ol>
+        <li>
+          Erdős, P., & Gallai, T. (1960). "Graphs with prescribed degrees of
+          vertices" (in Hungarian). Matematikai Lapok, 11, 264-274.
+        </li>
+        <li>
+          Havel, V. (1955). "A remark on the existence of finite graphs" (in
+          Czech). Časopis pro pěstování matematiky, 80, 477-480.
+        </li>
+        <li>
+          Hakimi, S. L. (1962). "On realizability of a set of integers as
+          degrees of the vertices of a linear graph". Journal of SIAM, 10(3),
+          496-506.
+        </li>
+        <li>
+          NetworkX Documentation.
+          <a href="https://networkx.org/documentation/stable/"
+            >https://networkx.org/documentation/stable/</a
+          >
+        </li>
+      </ol>
     </div>
-
-</body>
+    <!-- Add Prism JS core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Add Python language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+  </body>
 </html>
