@@ -1,9 +1,3 @@
-"""
-Graph Theory Project - Test Suite
-Author: Muhammad Mahdi Amirpour (m-amirpour)
-Created at: 2025-06-14 10:58:43 UTC
-"""
-
 import unittest
 from typing import Dict, List, Tuple
 from graph_algorithm import GraphSequenceAnalyzer

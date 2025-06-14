@@ -1,9 +1,3 @@
-"""
-Graph Theory Project - Main Entry Point
-Author: Muhammad Mahdi Amirpour (m-amirpour)
-Created at: 2025-06-14 10:29:51 UTC
-"""
-
 import tkinter as tk
 from gui import GraphSequenceGUI
 

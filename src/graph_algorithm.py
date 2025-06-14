@@ -1,9 +1,3 @@
-"""
-Graph Theory Project - Graph Algorithm Component
-Author: Muhammad Mahdi Amirpour (m-amirpour)
-Created at: 2025-06-14 10:55:58 UTC
-"""
-
 from typing import List, Set, Dict, Tuple
 import networkx as nx
 from itertools import combinations

@@ -1,9 +1,3 @@
-"""
-Graph Theory Project - GUI Component
-Author: Muhammad Mahdi Amirpour (m-amirpour)
-Created at: 2025-06-14 11:06:44 UTC
-"""
-
 import tkinter as tk
 from tkinter import ttk, messagebox
 import networkx as nx
